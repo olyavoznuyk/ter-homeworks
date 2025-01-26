@@ -20,4 +20,41 @@
 5. [Использование Terraform в команде](05/hw-05.md)
 
 
+## Домашнее задание "Введение в Terraform"
 
+![alt text](./img/ver.png)
+
+```
+"result": "Mlg7MeEuP7Rc6Pnm"
+```
+ Terraform требует, чтобы все ресурсы имели два метки: тип и имя. Например, docker_image и nginx.
+
+ ```
+ resource "docker_image" "nginx" {
+  name         = "nginx"
+  keep_locally = true
+}
+
+resource "docker_container" "example_nginx" {
+  image = docker_image.nginx.image_id
+  name  = "example_${random_password.random_string.result}"
+}
+```
+![alt text](./img/doc.png)
+
+![alt text](./img/dock.png)
+
+```
+{
+  "version": 4,
+  "terraform_version": "1.9.1",
+  "serial": 13,
+  "lineage": "9361b502-559c-94a7-6884-c3f1929d1927",
+  "outputs": {},
+  "resources": [],
+  "check_results": null
+}
+```
+docker-образ nginx:latest не был удален, потому что был сохранен в локальном реестре
+
+![alt text](./img/loc.png)
